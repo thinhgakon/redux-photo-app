@@ -2,8 +2,9 @@ import { addToAlbum } from "actions/photo";
 import Banner from "components/Banner";
 import PhotoForm from "features/Photo/components/PhotoForm";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { randomNumber } from "utils/common";
 import "./styles.scss";
 
 AddEditPage.propTypes = {};
@@ -11,10 +12,16 @@ AddEditPage.propTypes = {};
 function AddEditPage(props) {
   const history = useHistory();
   const dispatch = useDispatch();
+
   const handleSubmit = (values) => {
-    dispatch(addToAlbum(values));
+    const newPhoto = {
+      ...values,
+      id: randomNumber(10000, 99999),
+    };
+    dispatch(addToAlbum(newPhoto));
     history.push("/photos");
   };
+
   return (
     <div className="photo-edit">
       <Banner title="Pick your amazing photo 😎" />

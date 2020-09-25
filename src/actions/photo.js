@@ -4,3 +4,10 @@ export const addToAlbum = (payload) => {
         payload
     }
 }
+
+export const removePhoto = (payload) => {
+    return {
+        type: 'REMOVE_PHOTO',
+        payload
+    }
+}
