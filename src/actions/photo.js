@@ -11,3 +11,10 @@ export const removePhoto = (payload) => {
         payload
     }
 }
+
+export const updatePhoto = (payload) => {
+    return {
+        type: 'UPDATE_PHOTO',
+        payload
+    }
+}

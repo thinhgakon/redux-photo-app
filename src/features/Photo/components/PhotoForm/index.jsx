@@ -18,16 +18,13 @@ PhotoForm.defaultProps = {
 
 function PhotoForm(props) {
   // npm i --save react-select
+  const { initialValues, isAddMode } = props;
   return (
     <Formik
-      initialValues={{
-        title: "",
-        categoryId: null,
-        photo: "",
-      }}
+      initialValues={initialValues}
       validationSchema={Yup.object({
         title: Yup.string()
-          .max(15, "Must be 15 characters or less")
+          .max(30, "Must be 15 characters or less")
           .required("This field is required."),
         categoryId: Yup.number().required("This field is required.").nullable(),
         photo: Yup.string().required("This field is required."),
@@ -53,7 +50,9 @@ function PhotoForm(props) {
         <FastField name="photo" component={RandomPhotoField} label="Photo" />
 
         <FormGroup>
-          <Button color="primary">Add to album</Button>
+          <Button color={isAddMode ? "primary" : "success"}>
+            {isAddMode ? "Add to album" : "Update your photo"}
+          </Button>
         </FormGroup>
       </Form>
     </Formik>

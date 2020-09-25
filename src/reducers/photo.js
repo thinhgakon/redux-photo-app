@@ -79,9 +79,19 @@ const photoReducer = (state = initialState, action) => {
             const newList = [...state];
             newList.push(action.payload);
             return newList;
+
         case 'REMOVE_PHOTO':
             const removePhotoId = action.payload.id;
             return state.filter(photo => photo.id !== removePhotoId)
+
+        case 'UPDATE_PHOTO':
+            const newPhoto = action.payload;
+            const photoIndex = state.findIndex(photo => photo.id == newPhoto.id);
+            if (photoIndex >= 0) {
+                state[photoIndex] = newPhoto;
+                return state;
+            }
+
         default:
             break;
     }
